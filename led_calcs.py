@@ -58,7 +58,7 @@ def led_layout(volts_in: Union[int, float], led_forward_volts: Union[int, float]
         actual_volts_in = boost_settings[1]
     else:
         actual_volts_in = volts_in
-    led = "-#-"
+    led = "\u2500\u2a4d\u2500"
     total_LED_current = 0
     led_per_wire = divmod(actual_volts_in,led_forward_volts)
     total_wires = divmod(led_count,led_per_wire[0])
@@ -78,14 +78,17 @@ def led_layout(volts_in: Union[int, float], led_forward_volts: Union[int, float]
         total_LED_current += led_current
         resistor = get_current_limiter(actual_volts_in,led_forward_volts,max_leds_per_wire,led_current)
         if x == 0:
-            print(f"{actual_volts_in}V-+" + led * max_leds_per_wire + f"[{resistor}\u03A9]-")
+            print(f"{actual_volts_in}V+\u2500\u252c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+        elif x > 0 and x < full_wires_count - 1:
+            print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+        elif x > 0 and remaining_leds > 0:
+            print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
         else:
-            print(' '*len(str(actual_volts_in)) + " -+" + led * max_leds_per_wire + f"[{resistor}\u03A9]-")
-    
+            print(' '*len(str(actual_volts_in)) + "   \u2514" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
     if remaining_leds > 0:
         total_LED_current += led_current
         resistor_remain = get_current_limiter(actual_volts_in,led_forward_volts,remaining_leds,led_current)
-        print(' '*len(str(actual_volts_in)) + " +" + led * remaining_leds + f"[{resistor_remain}\u03A9]-")
+        print(' '*len(str(actual_volts_in)) + "   \u2514" + led * remaining_leds + '\u2500' * ((max_leds_per_wire - remaining_leds)*3) + f"[{resistor_remain}\u03A9]\u2500")
     print("END OF CIRCUIT\n")
 
     led_calc(volts_in,boost_settings[1],boost_settings[2],battery_mah,load_amp = total_LED_current, isBoosted = boost_settings[0])
@@ -156,4 +159,4 @@ def led_calc(volts_in: Union[int,float], volts_out:Union[int,float], max_efficie
         print(f"Battery Run Time = {battery_life_list[0][0]}hours and {battery_life_list[0][1]} minutes.")
         print(f"{print_current_msg} {int(load_amp * 1000)} mA / {round(load_amp,3)} Amps")
     
-led_layout(4.5,3,6,.02,(False,18,.9),2300,)
+led_layout(9,1.5,15,.02,(False,18,.9),2300,)

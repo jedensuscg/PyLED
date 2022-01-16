@@ -24,7 +24,7 @@ Ran with ```led_layout(4.5,3,6,.02,(True,18,.9),2300,)```
 ```
 Max LED's per parallel line: 6 LED's
 Total parallel wires with max LED's: 1 parallel wires
-18V-+-#--#--#--#--#--#-[1Ω]-
+18V+─┬─⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
 END OF CIRCUIT
 
 BATTERY RUN TIMES AND CURRENT DRAWS
@@ -46,16 +46,34 @@ Same input as above, except use boost converter set to **FALSE** this ignoring i
 ```
 Max LED's per parallel line: 1 LED's
 Total parallel wires with max LED's: 6 parallel wires
-4.5V-+-#-[82Ω]-
-    -+-#-[82Ω]-
-    -+-#-[82Ω]-
-    -+-#-[82Ω]-
-    -+-#-[82Ω]-
-    -+-#-[82Ω]-
+4.5V+─┬─⩍─[82Ω]─
+      ├─⩍─[82Ω]─
+      ├─⩍─[82Ω]─
+      ├─⩍─[82Ω]─
+      ├─⩍─[82Ω]─
+      └─⩍─[82Ω]─
 END OF CIRCUIT
 
 BATTERY RUN TIMES AND CURRENT DRAWS
 ********
 Battery Run Time = 19hours and 9 minutes.
 Total current draw: 120 mA / 0.12 Amps
+```
+
+Input: 9v, 2300 mAh batteries. 15 led's with forward voltage of 1.5v and current of 20mA. No boost converter 
+Ran with ```led_layout(9,1.5,15,.02,(False,18,.9),2300,)```
+
+```
+Max LED's per parallel line: 6 LED's
+Total parallel wires with max LED's: 2 parallel wires
+wire with any remaining LED's: 3
+9V+─┬─⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
+    ├─⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
+    └─⩍──⩍──⩍──────────[240Ω]─
+END OF CIRCUIT
+
+BATTERY RUN TIMES AND CURRENT DRAWS
+********
+Battery Run Time = 38hours and 20 minutes.
+Total current draw: 60 mA / 0.06 Amps
 ```
