@@ -42,7 +42,9 @@ Battery Run Time = 14hours and 22 minutes.
 Total current draw including boost converter: 160 mA / 0.16 Amps
 ```
 Same input as above, except use boost converter set to **FALSE** this ignoring it.
-```Max LED's per parallel line: 1 LED's
+
+```
+Max LED's per parallel line: 1 LED's
 Total parallel wires with max LED's: 6 parallel wires
 4.5V-+-#-[82Ω]-
     -+-#-[82Ω]-
@@ -55,4 +57,5 @@ END OF CIRCUIT
 BATTERY RUN TIMES AND CURRENT DRAWS
 ********
 Battery Run Time = 19hours and 9 minutes.
-Total current draw: 120 mA / 0.12 Amps```
+Total current draw: 120 mA / 0.12 Amps
+```
