@@ -1,15 +1,21 @@
-18V+─┬─⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
-     └─⩍──⩍──⩍────────────────────────────[750Ω]─
-END OF CIRCUIT
+********* LED SCHEMATIC ***********
+
+Conditions used to create this schematic:
+Battery Voltage: 9v
+Battery Capacity: 2300mAh
+LED stats: Number Used: 15, LED Forward Voltage: 1.5, LED Current: 0.02
+Is Boost Converter used? NO
+
+Max LED's per parallel line: 6 LED's
+Total parallel wires with max LED's: 2 parallel wires
+wire with any remaining LED's: 3
+
+9V+─┬─⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
+    ├─⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
+    └─⩍──⩍──⩍──────────[240Ω]─
+
 
 BATTERY RUN TIMES AND CURRENT DRAWS
 ********
-***Boost converter efficiency of 90.0%***
-Battery Run Time = 25hours and 33 minutes.
-Total current draw including boost converter: 90 mA / 0.09 Amps
-***Boost converter efficiency of 82.0%***
-Battery Run Time = 23hours and 0 minutes.
-Total current draw including boost converter: 100 mA / 0.1 Amps
-***Boost converter efficiency of 50.0%***
-Battery Run Time = 14hours and 22 minutes.
-Total current draw including boost converter: 160 mA / 0.16 Amps
+Battery Run Time = 38hours and 20 minutes.
+Total current draw: 60 mA / 0.06 Amps
