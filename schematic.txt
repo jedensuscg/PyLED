@@ -1,0 +1,15 @@
+18V+─┬─⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍──⩍─[1Ω]─
+     └─⩍──⩍──⩍────────────────────────────[750Ω]─
+END OF CIRCUIT
+
+BATTERY RUN TIMES AND CURRENT DRAWS
+********
+***Boost converter efficiency of 90.0%***
+Battery Run Time = 25hours and 33 minutes.
+Total current draw including boost converter: 90 mA / 0.09 Amps
+***Boost converter efficiency of 82.0%***
+Battery Run Time = 23hours and 0 minutes.
+Total current draw including boost converter: 100 mA / 0.1 Amps
+***Boost converter efficiency of 50.0%***
+Battery Run Time = 14hours and 22 minutes.
+Total current draw including boost converter: 160 mA / 0.16 Amps

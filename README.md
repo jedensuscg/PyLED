@@ -1,6 +1,8 @@
 WORK IN PROGRESS
 
-Simple little tool I am making for help in setting up simple LED circuits. There are many calculators on the web, I am making my own for fun. It it also combining different calculations into one.
+The code is hastily thrown together and FUGLY!
+
+Simple little tool I am making for help in setting up simple LED circuits. There are many calculators on the web, I am making my own for fun. It it also combining different calculations into one. It also spits out a txt file that is formatted to open in notepad++
 
 Currently is supports (though there is no menu yet, just manually running the functions or using the Jupyter notebook layout)
 - Create a basic ASCII (I mean basic) layout of a circuit given parameters such as power source voltage, number of LED's, forward voltage of LED's, and current draw of LED's. Currently all LED's have to be identical.

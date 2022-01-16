@@ -67,29 +67,51 @@ def led_layout(volts_in: Union[int, float], led_forward_volts: Union[int, float]
     full_wires_count = int(total_wires[0])
     remaining_leds = int(total_wires[1])
 
-    
-
     print(f"Max LED's per parallel line: {max_leds_per_wire} LED's")
     print(f"Total parallel wires with max LED's: {full_wires_count} parallel wires")
     if remaining_leds > 0:
         print(f"wire with any remaining LED's: {remaining_leds}")
 
-    for x in range(0, full_wires_count):
-        total_LED_current += led_current
-        resistor = get_current_limiter(actual_volts_in,led_forward_volts,max_leds_per_wire,led_current)
-        if x == 0:
-            print(f"{actual_volts_in}V+\u2500\u252c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
-        elif x > 0 and x < full_wires_count - 1:
-            print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
-        elif x > 0 and remaining_leds > 0:
-            print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
-        else:
-            print(' '*len(str(actual_volts_in)) + "   \u2514" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
-    if remaining_leds > 0:
-        total_LED_current += led_current
-        resistor_remain = get_current_limiter(actual_volts_in,led_forward_volts,remaining_leds,led_current)
-        print(' '*len(str(actual_volts_in)) + "   \u2514" + led * remaining_leds + '\u2500' * ((max_leds_per_wire - remaining_leds)*3) + f"[{resistor_remain}\u03A9]\u2500")
-    print("END OF CIRCUIT\n")
+    # for x in range(0, full_wires_count):
+    #     total_LED_current += led_current
+    #     resistor = get_current_limiter(actual_volts_in,led_forward_volts,max_leds_per_wire,led_current)
+    #     if x == 0:
+    #         print(f"{actual_volts_in}V+\u2500\u252c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+    #     elif x > 0 and x < full_wires_count - 1:
+    #         print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+    #     elif x > 0 and remaining_leds > 0:
+    #         print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+    #     else:
+    #         print(' '*len(str(actual_volts_in)) + "   \u2514" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+    # if remaining_leds > 0:
+    #     total_LED_current += led_current
+    #     resistor_remain = get_current_limiter(actual_volts_in,led_forward_volts,remaining_leds,led_current)
+    #     print(' '*len(str(actual_volts_in)) + "   \u2514" + led * remaining_leds + '\u2500' * ((max_leds_per_wire - remaining_leds)*3) + f"[{resistor_remain}\u03A9]\u2500")
+    # print("END OF CIRCUIT\n")
+
+    with open('schematic.txt', 'w', encoding="utf-8") as f:
+        for x in range(0, full_wires_count):
+            total_LED_current += led_current
+            resistor = get_current_limiter(actual_volts_in,led_forward_volts,max_leds_per_wire,led_current)
+            if x == 0:
+                print(f"{actual_volts_in}V+\u2500\u252c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+                f.write(f"{actual_volts_in}V+\u2500\u252c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500\n")
+            elif x > 0 and x < full_wires_count - 1:
+                print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+                f.write(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500\n")
+            elif x > 0 and remaining_leds > 0:
+                print(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+                f.write(' '*len(str(actual_volts_in)) + "   \u251c" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500\n")
+            else:
+                print(' '*len(str(actual_volts_in)) + "   \u2514" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500")
+                f.write(' '*len(str(actual_volts_in)) + "   \u2514" + led * max_leds_per_wire + f"[{resistor}\u03A9]\u2500\n")
+        if remaining_leds > 0:
+            total_LED_current += led_current
+            resistor_remain = get_current_limiter(actual_volts_in,led_forward_volts,remaining_leds,led_current)
+            print(' '*len(str(actual_volts_in)) + "   \u2514" + led * remaining_leds + '\u2500' * ((max_leds_per_wire - remaining_leds)*3) + f"[{resistor_remain}\u03A9]\u2500\n")
+            f.write(' '*len(str(actual_volts_in)) + "   \u2514" + led * remaining_leds + '\u2500' * ((max_leds_per_wire - remaining_leds)*3) + f"[{resistor_remain}\u03A9]\u2500\n")
+        print("END OF CIRCUIT\n")
+        f.write("END OF CIRCUIT\n")
 
     led_calc(volts_in,boost_settings[1],boost_settings[2],battery_mah,load_amp = total_LED_current, isBoosted = boost_settings[0])
 
@@ -130,33 +152,40 @@ def led_calc(volts_in: Union[int,float], volts_out:Union[int,float], max_efficie
         load_ma (float, optional): Current Current draw of the LED's, in milliAmps. Default 0. Any other numbers will override load_amp setting.
         isBoosted (bool, optional): Sets if the circuit is using a boost converter, or straight draw from the power source(i.e battery)
     """
+    with open("schematic.txt", 'a', encoding="utf-8") as f:
+        eff_list[0] = max_efficiency
+        battery_life_list = []
+        length = len(eff_list)
+        print("BATTERY RUN TIMES AND CURRENT DRAWS\n********")
+        f.write("\nBATTERY RUN TIMES AND CURRENT DRAWS\n********\n")
+        if load_ma != 0:
+            load_amp = load_ma / 1000
+            print("Ignoring load_amp value(is entered) as mA value was input")
+            f.write("Ignoring load_amp value(is entered) as mA value was input\n")
+        if isBoosted:
+            for i in range(length):
+                total_load_current = boost_current_draw(volts_in,volts_out,load_amp, eff_list[i])
+                eff_load_ma = total_load_current[0]
+                eff_load_amp = total_load_current[1]
+                battery_life = get_battery_life(battery_capacity,eff_load_ma)
+                battery_life_list.append([eff_load_ma,eff_load_amp,battery_life])
+            print_current_msg = "Total current draw including boost converter:"
+        else:
+            battery_life_list.append(get_battery_life(battery_capacity,load_amp * 1000))
+            print_current_msg = "Total current draw:"
 
-    eff_list[0] = max_efficiency
-    battery_life_list = []
-    length = len(eff_list)
-    print("BATTERY RUN TIMES AND CURRENT DRAWS\n********")
-    if load_ma != 0:
-        load_amp = load_ma / 1000
-        print("Ignoring load_amp value(is entered) as mA value was input")
-    if isBoosted:
-        for i in range(length):
-            total_load_current = boost_current_draw(volts_in,volts_out,load_amp, eff_list[i])
-            eff_load_ma = total_load_current[0]
-            eff_load_amp = total_load_current[1]
-            battery_life = get_battery_life(battery_capacity,eff_load_ma)
-            battery_life_list.append([eff_load_ma,eff_load_amp,battery_life])
-        print_current_msg = "Total current draw including boost converter:"
-    else:
-        battery_life_list.append(get_battery_life(battery_capacity,load_amp * 1000))
-        print_current_msg = "Total current draw:"
-
-    if len(battery_life_list) > 1:
-        for x in range(len(battery_life_list)):
-            print(f"***Boost converter efficiency of {eff_list[x] * 100}%***")
-            print(f"Battery Run Time = {battery_life_list[x][2][0]}hours and {battery_life_list[x][2][1]} minutes.")
-            print(f"{print_current_msg} {battery_life_list[x][0]} mA / {battery_life_list[x][1]} Amps\n")
-    else:
-        print(f"Battery Run Time = {battery_life_list[0][0]}hours and {battery_life_list[0][1]} minutes.")
-        print(f"{print_current_msg} {int(load_amp * 1000)} mA / {round(load_amp,3)} Amps")
+        if len(battery_life_list) > 1:
+            for x in range(len(battery_life_list)):
+                print(f"***Boost converter efficiency of {eff_list[x] * 100}%***")
+                f.write(f"***Boost converter efficiency of {eff_list[x] * 100}%***\n")
+                print(f"Battery Run Time = {battery_life_list[x][2][0]}hours and {battery_life_list[x][2][1]} minutes.")
+                f.write(f"Battery Run Time = {battery_life_list[x][2][0]}hours and {battery_life_list[x][2][1]} minutes.\n")
+                print(f"{print_current_msg} {battery_life_list[x][0]} mA / {battery_life_list[x][1]} Amps\n")
+                f.write(f"{print_current_msg} {battery_life_list[x][0]} mA / {battery_life_list[x][1]} Amps\n")
+        else:
+            print(f"Battery Run Time = {battery_life_list[0][0]}hours and {battery_life_list[0][1]} minutes.")
+            f.write(f"Battery Run Time = {battery_life_list[0][0]}hours and {battery_life_list[0][1]} minutes.\n")
+            print(f"{print_current_msg} {int(load_amp * 1000)} mA / {round(load_amp,3)} Amps")
+            f.write(f"{print_current_msg} {int(load_amp * 1000)} mA / {round(load_amp,3)} Amps\n")
     
-led_layout(9,1.5,15,.02,(False,18,.9),2300,)
+led_layout(9,1.5,15,.02,(True,18,.9),2300,)
