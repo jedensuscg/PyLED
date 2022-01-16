@@ -19,7 +19,7 @@ KEY:
 + = ANODE(Positive leg)
 [82Ω] = Calculated Resistor
 ```  
-4.5v input source, 6 led's with forward voltage of 3v and current of 20mA. using a Boost converter with a rated max efficiency of 90%, and a desired output voltage of 18v.
+Input: 4.5v, 2300 mAh batteries. 6 led's with forward voltage of 3v and current of 20mA. using a Boost converter with a rated max efficiency of 90%, and a desired output voltage of 18v. 
 Ran with ```led_layout(4.5,3,6,.02,(True,18,.9),2300,)```
 ```
 Max LED's per parallel line: 6 LED's
